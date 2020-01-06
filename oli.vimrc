@@ -32,6 +32,9 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ervandew/supertab'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
+Plugin 'arcticicestudio/nord-vim'
+Plugin 'tpope/vim-surround'
+Plugin 'christoomey/vim-tmux-navigator'
 
 call vundle#end()
 
@@ -52,16 +55,15 @@ set history=500
 set encoding=UTF-8
 set background=dark
 set t_Co=256   
-set cursorline
 set ruler
-set undofile                                     " to undo after file is re-opened
+set undofile                         	" to undo after file is re-opened
 set undodir=/tmp
 set laststatus=2
-set splitright                                   " Open new splits to the right
-set splitbelow                        		 " Open new splits to the bottom
-set lazyredraw                        		 " Reduce the redraw frequency
+set splitright                          " Open new splits to the right
+set splitbelow                 		" Open new splits to the bottom
+set lazyredraw                        	" Reduce the redraw frequency
 set ttyfast
-set clipboard+=unnamed  			 " use the clipboards of vim and win
+set clipboard+=unnamed  		" use the clipboards of vim and win
 set noerrorbells novisualbell
 set ignorecase smartcase
 set timeoutlen=1000 ttimeoutlen=0
@@ -69,7 +71,6 @@ set showcmd
 set lbr
 set tw=500
 set updatetime=100
-
 
 " Ignored files/directories from autocomplete (and CtrlP)
 set wildignore+=*/tmp/* 
@@ -94,9 +95,11 @@ filetype indent on
 
 
 
-
+""
 ""
 "" Autocommands
+""
+""
 au FocusGained,BufEnter * checktime
 
 
@@ -107,8 +110,18 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 " Mardown file
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 
-let g:NERDTreeRespectWildIgnore = 1
 
+
+
+
+""
+""
+"" Global settings
+""
+""
+
+" Nerdtree
+let g:NERDTreeRespectWildIgnore = 1
 
 
 " Airline
@@ -118,11 +131,9 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
 
 
-
 " Auto pairs
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
-
 
 
 " Key Mappings
@@ -143,7 +154,18 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
 
+" Disable Arrow keys
+" Edit: This is now handled by vim-tmux-navigator
+"
+" noremap <Up> <Nop>
+" noremap! <Down> <Nop>
+" noremap! <Left> <Nop>
+" noremap! <Right> <Nop>
+" noremap! <Up> <Nop>
+
 " Colors
 hi LineNr ctermfg=grey
-hi CursorLine cterm=NONE ctermbg=8
 
+
+" Load powerline
+" set rtp+=/usr/local/lib/python3.7/site-packages/powerline/bindings/vim
