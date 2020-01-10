@@ -7,9 +7,6 @@
 """
 
 
-syntax enable
-
-
 "" 
 "" 
 "" VUNDLE: to manage plugins
@@ -29,19 +26,21 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'ryanoasis/vim-devicons'
 Plugin 'ervandew/supertab'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'arcticicestudio/nord-vim'
 Plugin 'tpope/vim-surround'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'fatih/vim-go'
 
 call vundle#end()
 
 
 
-"" 
-"" 
+""
+"
 "" Preferences
 ""
 ""
@@ -53,8 +52,7 @@ set backspace=indent,eol,start
 set hlsearch
 set history=500
 set encoding=UTF-8
-set background=dark
-set t_Co=256   
+set t_Co=256
 set ruler
 set undofile                         	" to undo after file is re-opened
 set undodir=/tmp
@@ -71,12 +69,21 @@ set showcmd
 set lbr
 set tw=500
 set updatetime=100
+set cursorline
+set hidden
+set diffopt+=vertical
+set shiftwidth=4
+set expandtab
+set tabstop=4
+set autoindent smartindent
+set background=dark
+
 
 " Ignored files/directories from autocomplete (and CtrlP)
-set wildignore+=*/tmp/* 
+set wildignore+=*/tmp/*
 set wildignore+=*/target/*
 set wildignore+=*/build/*
-set wildignore+=*.so 
+set wildignore+=*.so
 set wildignore+=*.o 
 set wildignore+=*.class
 set wildignore+=*.swp 
@@ -89,10 +96,9 @@ set wildignore+=*/vendor/**/*
 
 
 
-
 filetype plugin on
 filetype indent on
-
+syntax enable
 
 
 ""
@@ -110,7 +116,8 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 " Mardown file
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 
-
+" Go lang
+au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 
 
 
@@ -136,6 +143,10 @@ let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 
+" vim-go
+let g:go_fmt_autosave=0
+
+
 " Key Mappings
 let mapleader="/"
 nmap <leader>ev :edit $MYVIMRC<CR>
@@ -148,24 +159,28 @@ cmap Wq wq
 
 
 " Quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+" Edit: this will be handled by vim-tmux-navigator
+"
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-l> <C-w>l
 
 
 " Disable Arrow keys
-" Edit: This is now handled by vim-tmux-navigator
-"
-" noremap <Up> <Nop>
-" noremap! <Down> <Nop>
-" noremap! <Left> <Nop>
-" noremap! <Right> <Nop>
-" noremap! <Up> <Nop>
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+noremap! <Down> <Nop>
+noremap! <Left> <Nop>
+noremap! <Right> <Nop>
+noremap! <Up> <Nop>
 
 " Colors
 hi LineNr ctermfg=grey
-
+hi CursorLine   cterm=none ctermbg=237
+hi CursorLineNR   cterm=none ctermbg=237
 
 " Load powerline
 " set rtp+=/usr/local/lib/python3.7/site-packages/powerline/bindings/vim
