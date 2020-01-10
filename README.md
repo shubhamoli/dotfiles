@@ -1,6 +1,6 @@
-# (.) files
+# .(dot)files
 
-Author: Shubham Oli <oli.shubham@gmail.com>
+Author: Shubham Oli [oli.shubham@gmail.com]
 
 ------
 
