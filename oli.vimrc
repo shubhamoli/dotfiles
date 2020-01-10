@@ -19,7 +19,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'chase/vim-ansible-yaml'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
@@ -29,8 +28,6 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'ervandew/supertab'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
-Plugin 'arcticicestudio/nord-vim'
 Plugin 'tpope/vim-surround'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'fatih/vim-go'
@@ -58,10 +55,10 @@ set undofile                         	" to undo after file is re-opened
 set undodir=/tmp
 set laststatus=2
 set splitright                          " Open new splits to the right
-set splitbelow                 		" Open new splits to the bottom
+set splitbelow                 		    " Open new splits to the bottom
 set lazyredraw                        	" Reduce the redraw frequency
 set ttyfast
-set clipboard+=unnamed  		" use the clipboards of vim and win
+set clipboard+=unnamed  		        " use the clipboards of vim and win
 set noerrorbells novisualbell
 set ignorecase smartcase
 set timeoutlen=1000 ttimeoutlen=0
