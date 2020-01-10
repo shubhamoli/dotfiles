@@ -28,9 +28,11 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'ervandew/supertab'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'fatih/vim-go'
+Plugin 'yggdroot/indentline'
 
 call vundle#end()
 
@@ -142,6 +144,10 @@ let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 " vim-go
 let g:go_fmt_autosave=0
+
+
+" indentiline char
+let g:indentLine_char='⎸'
 
 
 " Key Mappings
