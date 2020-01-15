@@ -26,13 +26,12 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ryanoasis/vim-devicons'
-Plugin 'ervandew/supertab'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'fatih/vim-go'
 Plugin 'yggdroot/indentline'
+Plugin 'ycm-core/YouCompleteMe'
 
 call vundle#end()
 
@@ -132,6 +131,7 @@ let g:NERDTreeRespectWildIgnore = 1
 
 " Airline
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
@@ -142,9 +142,11 @@ let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 
-" vim-go
-let g:go_fmt_autosave=0
-
+" YouCompleteMe
+"
+" For golang it requires: $ cd ~/.vim/bundle/YouCompleteMe && install.py --go-completer
+let g:ycm_autoclose_preview_window_after_completion=1
+nnoremap gd :YcmCompleter GoTo<CR>
 
 " indentiline char
 let g:indentLine_char='⎸'
@@ -179,6 +181,15 @@ noremap! <Down> <Nop>
 noremap! <Left> <Nop>
 noremap! <Right> <Nop>
 noremap! <Up> <Nop>
+
+
+" easier moving of code blocks
+" " Try to go into visual mode (v), thenselect several lines of code here and
+" " then press ``>`` several times.
+vnoremap < <gv  " better indentation
+vnoremap > >gv  " better indentation
+
+
 
 " Colors
 hi LineNr ctermfg=grey
