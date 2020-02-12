@@ -1,4 +1,4 @@
-""" 
+"" 
 """
 " Author:  Shubham Oli <oli.shubham@gmail.com>
 " Date:    11-Dec-2019
@@ -32,6 +32,9 @@ Plugin 'tpope/vim-surround'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'yggdroot/indentline'
 Plugin 'ycm-core/YouCompleteMe'
+"Plugin 'NLKNguyen/papercolor-theme'
+"Plugin 'sonph/onehalf',  {'rtp': 'vim/'}
+Plugin 'arcticicestudio/nord-vim'
 
 call vundle#end()
 
@@ -51,6 +54,7 @@ set hlsearch
 set history=500
 set encoding=UTF-8
 set t_Co=256
+set termguicolors                       " enable true colors support
 set ruler
 set undofile                         	" to undo after file is re-opened
 set undodir=/tmp
@@ -97,6 +101,7 @@ set wildignore+=*/vendor/**/*
 filetype plugin on
 filetype indent on
 syntax enable
+set syntax=on
 
 
 ""
@@ -127,6 +132,10 @@ au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 
 " Nerdtree
 let g:NERDTreeRespectWildIgnore = 1
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeIgnore = ['^node_modules$', '\.pyc', '^vendor$']
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
 " Airline
@@ -154,8 +163,9 @@ let g:indentLine_char='⎸'
 
 " Key Mappings
 let mapleader="/"
-nmap <leader>ev :edit $MYVIMRC<CR>
+nmap <leader>ev :edit $HOME/.vimrc<CR>
 nnoremap <Leader>a :NERDTreeToggle<cr>
+nnoremap <Leader>f :NERDTreeFind<cr>
 nmap <Leader><Leader> <Plug>NERDCommenterToggle
 vmap <Leader><Leader> <Plug>NERDCommenterToggle
 nmap <Leader><space> :nohls<cr>
@@ -196,5 +206,6 @@ hi LineNr ctermfg=grey
 hi CursorLine   cterm=none ctermbg=237
 hi CursorLineNR   cterm=none ctermbg=237
 
+colorscheme nord
 " Load powerline
 " set rtp+=/usr/local/lib/python3.7/site-packages/powerline/bindings/vim
