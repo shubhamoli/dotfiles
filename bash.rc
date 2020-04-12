@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-export EDITOR="vim"
+export EDITOR="nvim"
 export FCEDIT=$EDITOR
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -13,12 +13,12 @@ set -o noclobber
 
 [[ -f $HOME/.aliases ]] && source $HOME/.aliases
 
-current_branch(){
-    echo `git rev-parse --abbrev-ref HEAD`
+gcb(){
+    echo `git rev-parse --abbrev-ref HEAD 2>/dev/null`
 }
 
 git_branch() {
-    git branch 2>/dev/null 1>&2 && echo "-( `current_branch``git diff --quiet || echo ' *'` )"
+    git branch 2>/dev/null 1>&2 && echo "-( `gcb``git diff --quiet || echo ' *'` )"
 }
 
 # Export GOPATH
