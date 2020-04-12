@@ -1,4 +1,4 @@
-"" 
+""
 """
 " Author:  Shubham Oli <oli.shubham@gmail.com>
 " Date:    11-Dec-2019
@@ -7,8 +7,8 @@
 """
 
 
-"" 
-"" 
+""
+""
 "" VUNDLE: to manage plugins
 ""
 ""
@@ -23,18 +23,16 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
-Plugin 'tpope/vim-surround'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'yggdroot/indentline'
 Plugin 'ycm-core/YouCompleteMe'
-"Plugin 'NLKNguyen/papercolor-theme'
-"Plugin 'sonph/onehalf',  {'rtp': 'vim/'}
 Plugin 'arcticicestudio/nord-vim'
+
 
 call vundle#end()
 
@@ -54,7 +52,6 @@ set hlsearch
 set history=500
 set encoding=UTF-8
 set t_Co=256
-set termguicolors                       " enable true colors support
 set ruler
 set undofile                         	" to undo after file is re-opened
 set undodir=/tmp
@@ -79,6 +76,7 @@ set expandtab
 set tabstop=4
 set autoindent smartindent
 set background=dark
+set termguicolors                       " enable true colors support
 
 
 " Ignored files/directories from autocomplete (and CtrlP)
@@ -86,15 +84,15 @@ set wildignore+=*/tmp/*
 set wildignore+=*/target/*
 set wildignore+=*/build/*
 set wildignore+=*.so
-set wildignore+=*.o 
+set wildignore+=*.o
 set wildignore+=*.class
-set wildignore+=*.swp 
+set wildignore+=*.swp
 set wildignore+=*.zip
 set wildignore+=*.pdf
 set wildignore+=*/node_modules/**/*
 set wildignore+=*/bower_components/**/*
-set wildignore+=*/dist/**/*                  
-set wildignore+=*/vendor/**/*                    
+set wildignore+=*/dist/**/*
+set wildignore+=*/vendor/**/*
 
 
 
@@ -144,7 +142,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
-
+"let g:airline_left_sep = ''
+"let g:airline_right_sep = ''
 
 " Auto pairs
 let g:AutoPairsFlyMode = 0
@@ -162,14 +161,14 @@ let g:indentLine_char='⎸'
 
 
 " Key Mappings
-let mapleader="/"
+let mapleader=","
 nmap <leader>ev :edit $HOME/.vimrc<CR>
 nnoremap <Leader>a :NERDTreeToggle<cr>
-nnoremap <Leader>f :NERDTreeFind<cr>
 nmap <Leader><Leader> <Plug>NERDCommenterToggle
 vmap <Leader><Leader> <Plug>NERDCommenterToggle
 nmap <Leader><space> :nohls<cr>
 nnoremap <C-p> :Files<CR>
+nnoremap <leader>f :Ag<CR>
 cmap Wq wq
 
 
@@ -200,12 +199,34 @@ vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
 
 
+" Normal mode in Terminal mode
+tnoremap <Esc> <C-\><C-n>
+
+" Insert mode ny default
+if has('nvim')
+    autocmd TermOpen term://* startinsert
+endif
 
 " Colors
-hi LineNr ctermfg=grey
-hi CursorLine   cterm=none ctermbg=237
-hi CursorLineNR   cterm=none ctermbg=237
+"hi LineNr ctermfg=grey
+"hi CursorLine   cterm=none ctermbg=237
+"hi CursorLineNR   cterm=none ctermbg=237
+
+
 
 colorscheme nord
-" Load powerline
+
+
+" Transparent BG
+hi Normal guibg=NONE ctermbg=NONE
+hi LineNr guibg=NONE ctermbg=NONE
+
+
+
+" Git-Gutter
+"let g:gitgutter_override_sign_column_highlight = 0
+
+
+
+"Load powerline
 " set rtp+=/usr/local/lib/python3.7/site-packages/powerline/bindings/vim
