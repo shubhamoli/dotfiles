@@ -8,10 +8,17 @@ export LANG=en_US.UTF-8
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$PATH:$HOME/nvim-osx64/bin"
 
-# enable vi mode in bash
-set -o noclobber
+# if nvim is installed, set it as MANPAGER
+if command -v nvim 1>/dev/null 2>&1; then
+    export MANPAGER='nvim +Man!'
+    export MANWIDTH=999
+fi
 
-[[ -f $HOME/.aliases ]] && source $HOME/.aliases
+
+set -o noclobber
+set -o vi
+
+
 
 gcb(){
     echo `git rev-parse --abbrev-ref HEAD 2>/dev/null`
@@ -21,14 +28,21 @@ git_branch() {
     git branch 2>/dev/null 1>&2 && echo "-( `gcb``git diff --quiet || echo ' *'` )"
 }
 
+[[ -f $HOME/.aliases ]] && source $HOME/.aliases
+
 # Export GOPATH
 export GOPATH=$HOME/oli/github/golang:$GOPATH
 export PATH=$PATH:$GOPATH
+
 
 # NVM -- Node Version Manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
+
 # Custom PS1
 export PS1="╭─[ \u :: \h ] @ [ \e[33m\W\e[0m ]\$(git_branch)\n╰─➤➤  "
 
+
+# FZF settings
+FZF_DEFAULT_OPTS="--extended -i --height=50% --layout=default"
