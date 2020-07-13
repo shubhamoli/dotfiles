@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -eu
+set -e
 
 echo "Setting up dotfiles..."
 
@@ -16,5 +16,6 @@ mkdir -p $HOME/.config/{bspwm,sxhkd,polybar}
 ln -sf $PWD/.config/bspwm/bspwmrc $HOME/.config/bspwm/bspwmrc
 ln -sf $PWD/.config/sxhkd/sxhkdrc $HOME/.config/sxhkd/sxhkdrc
 ln -sf $PWD/.config/polybar/config $HOME/.config/polybar/config
+ln -sf $PWD/.config/polybar/launch.sh $HOME/.config/polybar/launch.sh
 
 echo "Done!"
