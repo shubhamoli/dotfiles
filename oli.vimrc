@@ -9,33 +9,38 @@
 
 ""
 ""
-"" VUNDLE: to manage plugins
+"" VIM-PLUG: to manage plugins
 ""
 ""
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'yggdroot/indentline'
-Plugin 'ycm-core/YouCompleteMe'
-Plugin 'arcticicestudio/nord-vim'
+Plug 'VundleVim/Vundle.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'jiangmiao/auto-pairs'
+Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'yggdroot/indentline'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'morhetz/gruvbox'
+Plug 'metakirby5/codi.vim'
+Plug 'liuchengxu/vim-which-key'
+Plug 'hashivim/vim-terraform'
 
-
-call vundle#end()
-
+call plug#end()
 
 
 ""
@@ -50,8 +55,6 @@ set nowrap
 set backspace=indent,eol,start
 set hlsearch
 set history=500
-set encoding=UTF-8
-set t_Co=256
 set ruler
 set undofile                         	" to undo after file is re-opened
 set undodir=/tmp
@@ -60,7 +63,7 @@ set splitright                          " Open new splits to the right
 set splitbelow                 		    " Open new splits to the bottom
 set lazyredraw                        	" Reduce the redraw frequency
 set ttyfast
-set clipboard+=unnamed  		        " use the clipboards of vim and win
+set clipboard=unnamedplus  		        " use the clipboards of vim and win
 set noerrorbells novisualbell
 set ignorecase smartcase
 set timeoutlen=1000 ttimeoutlen=0
@@ -76,7 +79,11 @@ set expandtab
 set tabstop=4
 set autoindent smartindent
 set background=dark
-set termguicolors                       " enable true colors support
+set nobackup                            " required by coc, turns of backing up in .swp files
+set nowritebackup                       " required by coc
+set backupdir=/tmp/backup//             " extra slash keeps fullpath of file to avoid
+set directory=/tmp/swp//                " conflict between 2 file with same name but in different directory
+
 
 
 " Ignored files/directories from autocomplete (and CtrlP)
@@ -96,10 +103,13 @@ set wildignore+=*/vendor/**/*
 
 
 
+syntax enable
+syntax on
 filetype plugin on
 filetype indent on
-syntax enable
-set syntax=on
+set encoding=UTF-8
+set t_Co=256
+
 
 
 ""
@@ -115,10 +125,14 @@ au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Mardown file
-autocmd BufRead,BufNewFile *.md set filetype=markdown
+autocmd BufRead,BufNewFile *.md set filetype=markdown | setlocal textwidth=80
 
 " Go lang
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
+
+" For Executing CLI from vim buffer
+command! Execit set splitright | vnew | set filetype=sh | read !sh #
+
 
 
 
@@ -145,31 +159,40 @@ let g:airline#extensions#tabline#formatter = 'default'
 "let g:airline_left_sep = ''
 "let g:airline_right_sep = ''
 
+
 " Auto pairs
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 
-" YouCompleteMe
-"
-" For golang it requires: $ cd ~/.vim/bundle/YouCompleteMe && install.py --go-completer
-let g:ycm_autoclose_preview_window_after_completion=1
-nnoremap gd :YcmCompleter GoTo<CR>
+" CoC keybindings
+source ~/.coc.vim
+
 
 " indentiline char
 let g:indentLine_char='⎸'
 
 
+" disable conceal by indentLine
+let g:indentLine_setConceal = 0
+
+
 " Key Mappings
 let mapleader=","
+let maplocalleader=","
 nmap <leader>ev :edit $HOME/.vimrc<CR>
 nnoremap <Leader>a :NERDTreeToggle<cr>
-nmap <Leader><Leader> <Plug>NERDCommenterToggle
-vmap <Leader><Leader> <Plug>NERDCommenterToggle
+nmap <Leader><Leader> <Plug>NERDCommenterToggle<cr>
+vmap <Leader><Leader> <Plug>NERDCommenterToggle<cr>
 nmap <Leader><space> :nohls<cr>
 nnoremap <C-p> :Files<CR>
 nnoremap <leader>f :Ag<CR>
 cmap Wq wq
+
+
+" which key
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+nnoremap <silent> <Space> :<c-u>WhichKey  '<Space>'<CR>
 
 
 " Quicker window movement
@@ -202,6 +225,7 @@ vnoremap > >gv  " better indentation
 " Normal mode in Terminal mode
 tnoremap <Esc> <C-\><C-n>
 
+
 " Insert mode ny default
 if has('nvim')
     autocmd TermOpen term://* startinsert
@@ -213,8 +237,7 @@ endif
 "hi CursorLineNR   cterm=none ctermbg=237
 
 
-
-colorscheme nord
+colorscheme gruvbox
 
 
 " Transparent BG
@@ -222,6 +245,9 @@ hi Normal guibg=NONE ctermbg=NONE
 hi LineNr guibg=NONE ctermbg=NONE
 
 
+" terraform plugin setup
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
 
 " Git-Gutter
 "let g:gitgutter_override_sign_column_highlight = 0
