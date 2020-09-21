@@ -23,6 +23,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'VundleVim/Vundle.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
+Plug 'ron89/thesaurus_query.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
@@ -81,10 +82,12 @@ set autoindent smartindent
 set background=dark
 set nobackup                            " required by coc, turns of backing up in .swp files
 set nowritebackup                       " required by coc
-set backupdir=/tmp/backup//             " extra slash keeps fullpath of file to avoid
-set directory=/tmp/swp//                " conflict between 2 file with same name but in different directory
+set backupdir=/tmp//                    " extra slash keeps fullpath of file to avoid
+set directory=/tmp//                    " conflict between 2 file with same name but in different directory
 
 
+set spell
+set spelllang=en
 
 " Ignored files/directories from autocomplete (and CtrlP)
 set wildignore+=*/tmp/*
@@ -193,6 +196,14 @@ cmap Wq wq
 " which key
 nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 nnoremap <silent> <Space> :<c-u>WhichKey  '<Space>'<CR>
+
+" Thesaurus query
+let g:tq_map_keys = 0
+let g:tq_truncation_on_syno_list_size = 200
+nnoremap <Leader>qt :ThesaurusQueryReplaceCurrentWord<CR>
+vnoremap <Leader>qt y:ThesaurusQueryReplace <C-r>"<CR>
+
+
 
 
 " Quicker window movement
