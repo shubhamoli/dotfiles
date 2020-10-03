@@ -1,12 +1,18 @@
 #!/bin/sh
 
 
-export EDITOR="nvim"
+export EDITOR="vim"
 export FCEDIT=$EDITOR
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export PATH=$PATH:/usr/local/go/bin
-export PATH="$PATH:$HOME/nvim-osx64/bin"
+export PATH=$PATH:/usr/local/go/bin:$HOME/.scripts
+export PATH="$PATH:$HOME/nvim-osx64/bin:$HOME/.emacs.d/bin"
+
+
+# Linux only
+# change caps to escape
+setxkbmap -option caps:escape
+
 
 # if nvim is installed, set it as MANPAGER
 if command -v nvim 1>/dev/null 2>&1; then
@@ -14,25 +20,34 @@ if command -v nvim 1>/dev/null 2>&1; then
     export MANWIDTH=999
 fi
 
+# Codi
+# Usage: codi [filetype] [filename]
+codi() {
+  local syntax="${1:-python}"
+  shift
+  vim -c \
+    "let g:startify_disable_at_vimenter = 1 |\
+    set bt=nofile ls=0 noru nonu nornu |\
+    hi ColorColumn ctermbg=NONE |\
+    hi VertSplit ctermbg=NONE |\
+    hi NonText ctermfg=0 |\
+    Codi $syntax" "$@"
+}
 
 set -o noclobber
-set -o vi
-
-
+#set -o vi
 
 gcb(){
     echo `git rev-parse --abbrev-ref HEAD 2>/dev/null`
 }
 
 git_branch() {
-    git branch 2>/dev/null 1>&2 && echo "-( `gcb``git diff --quiet || echo ' *'` )"
+    git branch 2>/dev/null 1>&2 && echo "- ( `gcb``git diff --quiet || echo ' *'` )"
 }
 
-[[ -f $HOME/.aliases ]] && source $HOME/.aliases
 
-# Export GOPATH
-export GOPATH=$HOME/oli/github/golang:$GOPATH
-export PATH=$PATH:$GOPATH
+[[ -f $HOME/.aliases ]] && source $HOME/.aliases
+[[ -f $HOME/.fzf_scripts ]] && source $HOME/.fzf_scripts
 
 
 # NVM -- Node Version Manager
@@ -42,7 +57,30 @@ export NVM_DIR="$HOME/.nvm"
 
 # Custom PS1
 export PS1="╭─[ \u :: \h ] @ [ \e[33m\W\e[0m ]\$(git_branch)\n╰─➤➤  "
+#export PS1="\n\u at \h in \W ~ \n>_ "
+reset=$(tput sgr0)
+bold=$(tput bold)
+yellow=$(tput setaf 11)
+blue=$(tput setaf 12)
+lime=$(tput setaf 10)
 
+#export PS1="\n${bold} ● ${yellow}● ${blue}●${reset} "
+#export PS1="\n\w ${lime}\$(git_branch)${reset} \n ⬤  ${yellow}⬤ ${reset}  ${blue}⬤ ${reset} "
 
 # FZF settings
 FZF_DEFAULT_OPTS="--extended -i --height=50% --layout=default"
+
+# hook up direnv
+if command -v direnv 1>/dev/null 2>&1; then
+    eval "$(direnv hook bash)"
+fi
+
+# enable bash completion
+[[ -f /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
+
+# enable bash completion for kubectl alias
+complete -F __start_kubectl kc
+
+
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
