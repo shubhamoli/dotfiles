@@ -40,6 +40,8 @@ Plug 'morhetz/gruvbox'
 Plug 'metakirby5/codi.vim'
 Plug 'liuchengxu/vim-which-key'
 Plug 'hashivim/vim-terraform'
+Plug 'tpope/vim-surround'
+Plug 'preservim/tagbar'
 
 call plug#end()
 
@@ -249,7 +251,6 @@ endif
 
 
 colorscheme gruvbox
-
 
 " Transparent BG
 hi Normal guibg=NONE ctermbg=NONE
