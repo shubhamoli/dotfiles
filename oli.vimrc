@@ -37,17 +37,18 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'yggdroot/indentline'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
-Plug 'metakirby5/codi.vim'
 Plug 'liuchengxu/vim-which-key'
 Plug 'hashivim/vim-terraform'
 Plug 'tpope/vim-surround'
 Plug 'preservim/tagbar'
+Plug 'SirVer/ultisnips'
+Plug 'fatih/vim-go'
+Plug 'prettier/vim-prettier', {'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'graphql', 'markdown', 'vue', 'svelte', 'html'] }
 
 call plug#end()
 
 
-""
-"
+
 "" Preferences
 ""
 ""
@@ -66,7 +67,7 @@ set splitright                          " Open new splits to the right
 set splitbelow                 		    " Open new splits to the bottom
 set lazyredraw                        	" Reduce the redraw frequency
 set ttyfast
-set clipboard=unnamedplus  		        " use the clipboards of vim and win
+set clipboard=unnamed                   " use the clipboards of vim and win
 set noerrorbells novisualbell
 set ignorecase smartcase
 set timeoutlen=1000 ttimeoutlen=0
@@ -76,12 +77,12 @@ set tw=500
 set updatetime=100
 set cursorline
 set hidden
-set diffopt+=vertical
+" set diffopt+=vertical
 set shiftwidth=4
 set expandtab
 set tabstop=4
 set autoindent smartindent
-set background=dark
+"set background=dark
 set nobackup                            " required by coc, turns of backing up in .swp files
 set nowritebackup                       " required by coc
 set backupdir=/tmp//                    " extra slash keeps fullpath of file to avoid
@@ -101,11 +102,13 @@ set wildignore+=*.class
 set wildignore+=*.swp
 set wildignore+=*.zip
 set wildignore+=*.pdf
-set wildignore+=*/node_modules/**/*
-set wildignore+=*/bower_components/**/*
-set wildignore+=*/dist/**/*
-set wildignore+=*/vendor/**/*
+set wildignore+=*/node_modules/*
+set wildignore+=*/bower_components/*
+set wildignore+=*/dist/*
+set wildignore+=*/vendor/*
+set wildignore+=*/.git/*
 
+set wildmode=list:longest,list:full
 
 
 syntax enable
@@ -137,6 +140,9 @@ au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 
 " For Executing CLI from vim buffer
 command! Execit set splitright | vnew | set filetype=sh | read !sh #
+
+" Python files
+autocmd BufWritePre *.py 0,$!yapf
 
 
 
@@ -181,16 +187,30 @@ let g:indentLine_char='⎸'
 " disable conceal by indentLine
 let g:indentLine_setConceal = 0
 
+" Ultisnip
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsSnippetDirectories = [$HOME.'/.vim/UltiSnips']
+
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 " Key Mappings
 let mapleader=","
 let maplocalleader=","
 nmap <leader>ev :edit $HOME/.vimrc<CR>
 nnoremap <Leader>a :NERDTreeToggle<cr>
+nnoremap <Leader>t :NERDTreeFind<cr>
 nmap <Leader><Leader> <Plug>NERDCommenterToggle<cr>
 vmap <Leader><Leader> <Plug>NERDCommenterToggle<cr>
 nmap <Leader><space> :nohls<cr>
 nnoremap <C-p> :Files<CR>
+nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>f :Ag<CR>
 cmap Wq wq
 
@@ -227,6 +247,10 @@ noremap! <Left> <Nop>
 noremap! <Right> <Nop>
 noremap! <Up> <Nop>
 
+" move through buffers
+nmap <leader>[ :bp!<CR>
+nmap <leader>] :bn!<CR>
+nmap <leader>x :bd<CR>
 
 " easier moving of code blocks
 " " Try to go into visual mode (v), thenselect several lines of code here and
@@ -237,6 +261,12 @@ vnoremap > >gv  " better indentation
 
 " Normal mode in Terminal mode
 tnoremap <Esc> <C-\><C-n>
+
+" Prettier config
+let g:prettier#exec_cmd_async = 1
+let g:prettier#quickfix_auto_focus = 0
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
 
 
 " Insert mode ny default
@@ -249,8 +279,12 @@ endif
 "hi CursorLine   cterm=none ctermbg=237
 "hi CursorLineNR   cterm=none ctermbg=237
 
+"let g:NERDTreeHijackNetrw = 0
+"let g:ranger_replace_netrw = 1
+"let g:ranger_command_override = 'ranger --cmd "set show_hidden=true"'
 
 colorscheme gruvbox
+
 
 " Transparent BG
 hi Normal guibg=NONE ctermbg=NONE
@@ -263,7 +297,6 @@ let g:terraform_fmt_on_save=1
 
 " Git-Gutter
 "let g:gitgutter_override_sign_column_highlight = 0
-
 
 
 "Load powerline

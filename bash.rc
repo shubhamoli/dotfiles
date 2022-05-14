@@ -5,14 +5,16 @@ export EDITOR="vim"
 export FCEDIT=$EDITOR
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export PATH=$PATH:/usr/local/go/bin:$HOME/.scripts
-export PATH="$PATH:$HOME/nvim-osx64/bin:$HOME/.emacs.d/bin"
+export PATH=$PATH:/usr/local/bin/go/bin:$HOME/.scripts:$HOME/Downloads/nvim-osx64/bin:$HOME/Library/Python/3.9/bin
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
+HISTCONTROL=ignorespace
+
+set -o emacs
 
 # Linux only
 # change caps to escape
-setxkbmap -option caps:escape
-
+# setxkbmap -option caps:escape
 
 # if nvim is installed, set it as MANPAGER
 if command -v nvim 1>/dev/null 2>&1; then
@@ -48,27 +50,41 @@ git_branch() {
 
 [[ -f $HOME/.aliases ]] && source $HOME/.aliases
 [[ -f $HOME/.fzf_scripts ]] && source $HOME/.fzf_scripts
-
+if [ -n "$RANGER_LEVEL" ]; then export PS1="[ranger]$PS1"; fi
 
 # NVM -- Node Version Manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
+set_prompt() {
+    # Custom PS1
+    # export PS1="╭─[ \u :: \h ] @ [ \e[33m\W\e[0m ]\$(git_branch)\n╰─➤➤  "
+	local reset="\e[0m";
+	local black="\e[1;30m";
+	local blue="\e[1;34m";
+	local cyan="\e[1;36m";
+	local green="\e[0;32m";
+	local orange="\e[1;33m";
+	local purple="\e[1;35m";
+	local red="\e[1;31m";
+	local violet="\e[1;35m";
+	local white="\e[1;37m";
+	local yellow="\e[1;33m";
+    #export PS1="\w ${green}\$(git_branch)${reset} \n ⬤  ${yellow}⬤  ${blue}⬤ ${reset} "
+    export PS1="\w \e[0;32m\$(git_branch)\e[0m \n ⬤  "
+}
 
-# Custom PS1
-export PS1="╭─[ \u :: \h ] @ [ \e[33m\W\e[0m ]\$(git_branch)\n╰─➤➤  "
-#export PS1="\n\u at \h in \W ~ \n>_ "
-reset=$(tput sgr0)
-bold=$(tput bold)
-yellow=$(tput setaf 11)
-blue=$(tput setaf 12)
-lime=$(tput setaf 10)
+set_prompt
 
-#export PS1="\n${bold} ● ${yellow}● ${blue}●${reset} "
-#export PS1="\n\w ${lime}\$(git_branch)${reset} \n ⬤  ${yellow}⬤ ${reset}  ${blue}⬤ ${reset} "
+
+function activatesandbox(){
+    aws eks update-kubeconfig --name $1-aws-ib-sandbox --region us-east-2 --profile=ib-sandbox-user --kubeconfig=tmp
+}
+
 
 # FZF settings
 FZF_DEFAULT_OPTS="--extended -i --height=50% --layout=default"
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # hook up direnv
 if command -v direnv 1>/dev/null 2>&1; then
@@ -76,11 +92,26 @@ if command -v direnv 1>/dev/null 2>&1; then
 fi
 
 # enable bash completion
-[[ -f /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
+if [ "$(uname)" == "Darwin" ]; then
+    export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+    [[ -r "/usr/local/etc/profile.d/bash_completion.sh"  ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+else
+    [[ -f /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
+fi
 
 # enable bash completion for kubectl alias
 complete -F __start_kubectl kc
 
 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/oli/instabase/google-cloud-sdk/path.bash.inc' ]; then . '/Users/oli/instabase/google-cloud-sdk/path.bash.inc'; fi
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/oli/instabase/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/oli/instabase/google-cloud-sdk/completion.bash.inc'; fi
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# append nodejs path and init nodenv
+eval "$(nodenv init -)"
+export PATH="/usr/local/bin/nodejs/node-v16.13.2-darwin-x64/bin/node:$PATH"

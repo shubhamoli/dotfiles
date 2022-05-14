@@ -1,0 +1,40 @@
+alias fuck='sudo $(history -p \!\!)'
+
+alias dc='docker-compose'
+alias kc='kubectl'
+alias gc='gcloud'
+alias ec='eksctl'
+alias vm='vagrant'
+alias tf='terraform'
+
+alias ll='ls -al'
+
+# linux
+alias brc='vim ~/.bashrc'
+alias sbrc='source ~/.bashrc'
+
+# OSX
+alias brc='vim ~/.bash_profile'
+alias sbrc='source ~/.bash_profile'
+
+alias gst='git status'
+alias gds='git diff --staged'
+alias gsync='git pull --rebase upstream master'
+alias grec='git for-each-ref --sort=-committerdate refs/heads/ | head -n 5'
+
+
+alias insta='cd ~/instabase'
+alias exp='cd ~/instabase/instabase/experimental/oli/'
+alias dep='cd ~/instabase/deployments'
+alias copyrsa='cat ~/.ssh/id_rsa.pub | pbcopy'
+
+alias ctags='/usr/local/bin/ctags'
+
+
+function activatesandbox() {
+    aws eks update-kubeconfig \
+        --name=$1-aws-ib-sandbox \
+        --region=us-east-2 \
+        --profile=ib-sandbox-user \
+        --kubeconfig=/tmp/kubeconfig
+}

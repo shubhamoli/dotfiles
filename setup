@@ -8,14 +8,15 @@ ln -sf $PWD/oli.vimrc $HOME/.vimrc
 ln -sf $PWD/tmux.conf $HOME/.tmux.conf
 ln -sf $PWD/aliases $HOME/.aliases
 ln -sf $PWD/bash.rc $HOME/.bashrc
-ln -sf $PWD/init.nvim $HOME/.config/init.nvim
+#ln -sf $PWD/bash.rc $HOME/.bash_profile    # for mac
+#ln -sf $PWD/init.nvim $HOME/.config/init.nvim
 
 
-mkdir -p $HOME/.config/{bspwm,sxhkd,polybar}
+#mkdir -p $HOME/.config/{bspwm,sxhkd,polybar}
 
-ln -sf $PWD/.config/bspwm/bspwmrc $HOME/.config/bspwm/bspwmrc
-ln -sf $PWD/.config/sxhkd/sxhkdrc $HOME/.config/sxhkd/sxhkdrc
-ln -sf $PWD/.config/polybar/config $HOME/.config/polybar/config
-ln -sf $PWD/.config/polybar/launch.sh $HOME/.config/polybar/launch.sh
+#ln -sf $PWD/.config/bspwm/bspwmrc $HOME/.config/bspwm/bspwmrc
+#ln -sf $PWD/.config/sxhkd/sxhkdrc $HOME/.config/sxhkd/sxhkdrc
+#ln -sf $PWD/.config/polybar/config $HOME/.config/polybar/config
+#ln -sf $PWD/.config/polybar/launch.sh $HOME/.config/polybar/launch.sh
 
 echo "Done!"
