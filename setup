@@ -7,8 +7,8 @@ echo "Setting up dotfiles..."
 ln -sf $PWD/oli.vimrc $HOME/.vimrc
 ln -sf $PWD/tmux.conf $HOME/.tmux.conf
 ln -sf $PWD/aliases $HOME/.aliases
-ln -sf $PWD/bash.rc $HOME/.bashrc
-#ln -sf $PWD/bash.rc $HOME/.bash_profile    # for mac
+#ln -sf $PWD/bash.rc $HOME/.bashrc
+ln -sf $PWD/bash.rc $HOME/.bash_profile    # for mac
 #ln -sf $PWD/init.nvim $HOME/.config/init.nvim
 
 

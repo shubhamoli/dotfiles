@@ -20,8 +20,10 @@ alias sbrc='source ~/.bash_profile'
 alias gst='git status'
 alias gds='git diff --staged'
 alias gsync='git pull --rebase upstream master'
+alias syncup='git pull --rebase upstream master'
 alias grec='git for-each-ref --sort=-committerdate refs/heads/ | head -n 5'
 
+alias fbr='git short-recent | fzf --print0 | xargs -0 -t git checkout'
 
 alias insta='cd ~/instabase'
 alias exp='cd ~/instabase/instabase/experimental/oli/'

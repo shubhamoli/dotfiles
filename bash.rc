@@ -5,12 +5,12 @@ export EDITOR="vim"
 export FCEDIT=$EDITOR
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export PATH=$PATH:/usr/local/bin/go/bin:$HOME/.scripts:$HOME/Downloads/nvim-osx64/bin:$HOME/Library/Python/3.9/bin
+export PATH=$PATH:/usr/local/bin/go/bin:$HOME/.scripts:$HOME/Downloads/nvim-osx64/bin:$HOME/Library/Python/3.9/bin:/opt/homebrew/bin
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 HISTCONTROL=ignorespace
 
-set -o emacs
+set -o vi
 
 # Linux only
 # change caps to escape
@@ -100,18 +100,20 @@ else
 fi
 
 # enable bash completion for kubectl alias
-complete -F __start_kubectl kc
+#source <(kubectl completion bash | sed 's/kubectl/kc/g')
+#complete -F __start_kubectl kc
 
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/oli/instabase/google-cloud-sdk/path.bash.inc' ]; then . '/Users/oli/instabase/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/oli/instabase/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/oli/instabase/google-cloud-sdk/completion.bash.inc'; fi
-
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
 
 # append nodejs path and init nodenv
-eval "$(nodenv init -)"
-export PATH="/usr/local/bin/nodejs/node-v16.13.2-darwin-x64/bin/node:$PATH"
+#eval "$(nodenv init -)"
+#export PATH="/usr/local/bin/nodejs/node-v16.13.2-darwin-x64/bin/node:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/oli/google-cloud-sdk/path.bash.inc' ]; then . '/Users/oli/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/oli/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/oli/google-cloud-sdk/completion.bash.inc'; fi
+export PATH="/opt/homebrew/bin:$PATH"
