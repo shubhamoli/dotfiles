@@ -43,11 +43,21 @@ return require('packer').startup(function(use)
     end
   }
 
+
+  -- Telescope
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.0',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+
+  -- File Tree
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+    }
+  }
 
 
   ----------------------------------------
