@@ -9,13 +9,17 @@ require('telescope').setup{
   defaults = {
     -- Default configuration for telescope goes here:
     -- config_key = value,
+    border = true,
     mappings = {
       i = {
         -- map actions.which_key to <C-h> (default: <C-/>)
         -- actions.which_key shows the mappings for your picker,
         -- e.g. git_{create, delete, ...}_branch for the git_branches picker
         ["<C-h>"] = "which_key"
-      }
+      },
+      n = {
+        ["q"] = require("telescope.actions").close 
+      },
     }
   },
   pickers = {
@@ -35,3 +39,12 @@ require('telescope').setup{
     -- please take a look at the readme of the extension you want to configure
   }
 }
+
+-- Telescope.nvim
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+vim.keymap.set('n', '<C-f>', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>b', builtin.buffers, {})
+
+
+
