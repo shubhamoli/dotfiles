@@ -33,6 +33,9 @@ return require('packer').startup(function(use)
     end
   }
 
+  use { "ellisonleao/gruvbox.nvim" }
+  use { "jacoborus/tender.vim" }
+
 
   -- Treesitter
   use {
@@ -57,6 +60,13 @@ return require('packer').startup(function(use)
     requires = {
       'nvim-tree/nvim-web-devicons', -- optional, for file icons
     }
+  }
+
+
+  -- Status line
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
 

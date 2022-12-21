@@ -14,4 +14,4 @@ require("plugins")
 require("keybindings")
 
 -- Misc.
-vim.cmd('colorscheme poimandres')
+vim.cmd('colorscheme gruvbox')

@@ -29,6 +29,9 @@ vim.o.shiftwidth = 2
 vim.o.termguicolors = true
 vim.o.completeopt = 'menuone,noselect'
 
+vim.o.splitbelow = true
+vim.o.splitright = true
+
 vim.o.scrolloff = 10
 vim.o.updatetime = 50
 
