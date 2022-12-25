@@ -17,3 +17,5 @@ utils.nnoremap("<C-j>", "<C-w>j")
 utils.nnoremap("<C-k>", "<C-w>k")
 utils.nnoremap("<C-l>", "<C-w>l")
 
+utils.nnoremap("<leader>x", ":bd!")
+
