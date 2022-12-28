@@ -73,6 +73,13 @@ return require('packer').startup(function(use)
   }
 
 
+  -- Smooth tmux / vim navigation
+  use({
+    "aserowy/tmux.nvim",
+    config = function() require("tmux").setup() end
+  })
+
+
   ----------------------------------------
   -- Autosync packer
   -- Note: This needs to be at the bottom
