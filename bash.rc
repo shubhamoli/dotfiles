@@ -1,12 +1,19 @@
 #!/bin/sh
 
 
-export EDITOR="vim"
+export EDITOR="nvim"
+export VISUAL="nvim"
+export GPG_TTY=$(tty)
 export FCEDIT=$EDITOR
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export PATH=$PATH:/usr/local/bin/go/bin:$HOME/.scripts:$HOME/Downloads/nvim-osx64/bin:$HOME/Library/Python/3.9/bin:/opt/homebrew/bin
+export PATH=$PATH:/usr/local/go/bin:$HOME/.scripts:/opt/homebrew/bin:$HOME/.local/bin:$HOME/.local/google-cloud-sdk/bin
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# Upvest specifi
+export GOPRIVATE=github.com/toknapp/*
+export GOPROXY=http://goproxy.upvest.io:8080
+export GONOSUMDB=github.com/toknapp/*
 
 HISTCONTROL=ignorespace
 
@@ -117,3 +124,6 @@ if [ -f '/Users/oli/google-cloud-sdk/path.bash.inc' ]; then . '/Users/oli/google
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/oli/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/oli/google-cloud-sdk/completion.bash.inc'; fi
 export PATH="/opt/homebrew/bin:$PATH"
+
+# Disable history for the obvious reasons (Upvest)
+unset HISTFILE

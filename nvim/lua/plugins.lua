@@ -19,7 +19,13 @@ end
 
 local packer_bootstrap = ensure_packer()
 
-return require('packer').startup(function(use)
+local packer = require('packer')
+
+packer.init {
+    max_jobs = 20,
+}
+
+return packer.startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
@@ -35,6 +41,7 @@ return require('packer').startup(function(use)
 
   use { "ellisonleao/gruvbox.nvim" }
   use { "jacoborus/tender.vim" }
+  use { "catppuccin/nvim", as = "catppuccin" }
 
 
   -- Treesitter
@@ -79,6 +86,32 @@ return require('packer').startup(function(use)
     config = function() require("tmux").setup() end
   })
 
+
+  use {
+    "lewis6991/gitsigns.nvim",
+    config = function() require("gitsigns").setup() end
+  }
+
+  use({
+    "kylechui/nvim-surround",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  })
+
+  -- LuaSnip
+  use({
+    "L3MON4D3/LuaSnip",
+    run = "make install_jsregexp"
+  })
+
+
+  -- vim-terraform
+  use({
+    "hashivim/vim-terraform",
+  })
 
   ----------------------------------------
   -- Autosync packer

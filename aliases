@@ -17,6 +17,8 @@ alias sbrc='source ~/.bashrc'
 alias brc='vim ~/.bash_profile'
 alias sbrc='source ~/.bash_profile'
 
+alias vim='nvim'
+
 alias gst='git status'
 alias gds='git diff --staged'
 alias gsync='git pull --rebase upstream master'
