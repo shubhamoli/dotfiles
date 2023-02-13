@@ -27,18 +27,7 @@ alias grec='git for-each-ref --sort=-committerdate refs/heads/ | head -n 5'
 
 alias fbr='git short-recent | fzf --print0 | xargs -0 -t git checkout'
 
-alias insta='cd ~/instabase'
-alias exp='cd ~/instabase/instabase/experimental/oli/'
-alias dep='cd ~/instabase/deployments'
 alias copyrsa='cat ~/.ssh/id_rsa.pub | pbcopy'
 
 alias ctags='/usr/local/bin/ctags'
 
-
-function activatesandbox() {
-    aws eks update-kubeconfig \
-        --name=$1-aws-ib-sandbox \
-        --region=us-east-2 \
-        --profile=ib-sandbox-user \
-        --kubeconfig=/tmp/kubeconfig
-}
