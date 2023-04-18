@@ -35,7 +35,7 @@ vim.o.splitright = true
 vim.o.scrolloff = 10
 vim.o.updatetime = 50
 
-vim.wo.signcolumn = 'no'
+vim.o.signcolumn = 'number'
 
 vim.o.hidden = true
 vim.o.fileencoding = "utf-8"

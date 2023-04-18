@@ -20,6 +20,8 @@ set -o noclobber
 # change caps to escape
 # setxkbmap -option caps:escape
 
+ulimit -n 65535
+
 # if nvim is installed, set it as MANPAGER
 if command -v nvim 1>/dev/null 2>&1; then
     export MANPAGER='nvim +Man!'

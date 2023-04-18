@@ -6,6 +6,7 @@ alias gc='gcloud'
 alias ec='eksctl'
 alias vm='vagrant'
 alias tf='terraform'
+alias tg='terragrunt'
 
 alias ll='ls -al'
 

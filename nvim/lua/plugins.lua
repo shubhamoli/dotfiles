@@ -87,11 +87,19 @@ return packer.startup(function(use)
   })
 
 
+  -- Git signs in the statusline
   use {
     "lewis6991/gitsigns.nvim",
     config = function() require("gitsigns").setup() end
   }
 
+  -- Autopair
+  use {
+	  "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup() end
+  }
+
+  -- surround helper
   use({
     "kylechui/nvim-surround",
     config = function()
@@ -100,6 +108,14 @@ return packer.startup(function(use)
       })
     end
   })
+
+  -- Commenting plugin
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end
+  }
 
   -- LuaSnip
   use({

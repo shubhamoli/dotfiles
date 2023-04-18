@@ -16,17 +16,39 @@ local upvest_copyright = {
   "// obtained from Upvest GmbH."
 }
 
+local ls = require("luasnip")
+local s = ls.snippet
+
 return {
   -- A snippet that expands the trigger "hi" into the string "Hello, world!".
-  require("luasnip").snippet(
+  s(
     { trig = "hi" },
     { t("Hello world!") }
   ),
-  
 
-  require("luasnip").snippet(
+  s(
     { trig = "copyr" },
     { t(upvest_copyright) }
   ),
 
+  s(
+    { trig = "tfvar" },
+    { 
+      t("variable \""), i(1, "name"), t("\" {"),
+      t("type = "), i(2, "type"),
+      t("default = "), i(3, "default"),
+      t("description = "), i(4, "description"),
+      t("}"),
+    }
+  )
+
 }
+
+
+
+  --
+  --require("luasnip").snippet(
+  --  { trig = "tfvar" },
+  --  i(1, "cond"), t(" ? "), i(2, "then"), t(" : "), i(3, "else")
+  --)
+
