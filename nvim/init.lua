@@ -25,7 +25,20 @@ vim.cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform]])
 vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
 
 
+-- go.nvim
+local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+   require('go.format').gofmt()
+  end,
+  group = format_sync_grp,
+})
+
+
 -- Misc.
 --vim.cmd('colorscheme gruvbox')
 vim.cmd('colorscheme catppuccin')
+
+vim.cmd([[highlight LineHighlight ctermbg=green guibg=darkgray]])
 

@@ -32,3 +32,8 @@ utils.nnoremap("<leader>r", ":NeoTreeReveal<cr>")
 utils.xnoremap('<', '<gv')
 utils.xnoremap('>', '>gv')
 
+
+-- highlight the current line
+utils.nnoremap("<leader>ll", ":call matchadd('LineHighlight', '\\%'.line('.').'l')<cr>")
+-- clear all the highlighted lines
+utils.nnoremap("<leader>c", ":call clearmatches()<cr>")

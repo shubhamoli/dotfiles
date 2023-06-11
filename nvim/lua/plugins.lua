@@ -72,6 +72,9 @@ return packer.startup(function(use)
     }
   }
 
+  use {
+    "neovim/nvim-lspconfig",
+  }
 
   -- Status line
   use {
@@ -128,6 +131,17 @@ return packer.startup(function(use)
   use({
     "hashivim/vim-terraform",
   })
+
+  -- go.nvim
+  use {
+    'ray-x/go.nvim',
+    config = function ()
+      require('go').setup()
+    end
+  }
+
+  use 'ray-x/guihua.lua' -- required by go.nvim above
+
 
   ----------------------------------------
   -- Autosync packer
