@@ -15,13 +15,13 @@ Author: Shubham Oli [oli.shubham@gmail.com]
 
 ## Config files
 
-- `.vimrc`
-- `init.nvim`
+- `nvim/`
+- `alacritty/`
 - `.tmux.conf`
 - `.bashrc`
-- `.git/config`
-- `.gitignore`
-- `bash aliases`
+- `.vimrc`
+- `aliases`
+- `.config`
 
 
 ## LICENSE
