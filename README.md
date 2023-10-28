@@ -8,7 +8,7 @@ Author: Shubham Oli [oli.shubham@gmail.com]
 
 ## Installation
 
-1. `git clone https://github,com/shubhamoli/dotfiles`
+1. `git clone https://github.com/shubhamoli/dotfiles`
 2. `cd dotfiles`
 3. `/bin/sh setup`
 
