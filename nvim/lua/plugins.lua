@@ -126,7 +126,6 @@ return packer.startup(function(use)
     run = "make install_jsregexp"
   })
 
-
   -- vim-terraform
   use({
     "hashivim/vim-terraform",
