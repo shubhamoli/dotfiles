@@ -1,0 +1,49 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+# Any items in the `env` entry below will be added as
+# environment variables. Some entries may override variables
+# set by alacritty itself.
+env:
+  # TERM variable
+  #
+  # This value is used to set the `$TERM` environment variable for
+  # each instance of Alacritty. If it is not present, alacritty will
+  # check the local terminfo database and use `alacritty` if it is
+  # available, otherwise `xterm-256color` is used.
+  TERM: xterm-256color
+
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  history: 100000
+
+font:
+  # Point size
+  size: 14.0
+
+  # Normal (roman) font face
+  normal:
+    family: FiraCode Nerd Font
+    style: Regular
+
+  # Bold font face
+  bold:
+    family: FiraCode Nerd Font
+    style: Bold
+
+  # Italic font face
+  italic:
+    family: FiraCode Nerd Font
+    style: Italic
+
+  # Bold italic font face
+  bold_italic:
+    family: FiraCode Nerd Font
+    style: Bold Italic
+
+shell:
+  program: /bin/bash
+  args:
+    - --login
+
+
