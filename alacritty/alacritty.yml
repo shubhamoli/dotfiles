@@ -12,6 +12,32 @@ env:
   # available, otherwise `xterm-256color` is used.
   TERM: xterm-256color
 
+window:
+  padding:
+    x: 3
+    y: 3
+
+  # Window decorations
+  #
+  # Available values:
+  # - full: borders and title bar
+  # - none: neither borders nor title bar
+  # - transparent: title bar, transparent background and title bar buttons
+  # - buttonless: title bar, transparent background, but no title bar buttons
+  decorations: buttonless
+
+  # Startup Mode (changes require restart)
+  #
+  # Values for `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  startup_mode: Maximized
+
+  # Background opacity
+  opacity: 1.0
+
+
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
@@ -19,7 +45,7 @@ scrolling:
 
 font:
   # Point size
-  size: 14.0
+  size: 15.0
 
   # Normal (roman) font face
   normal:

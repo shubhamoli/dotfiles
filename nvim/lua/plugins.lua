@@ -18,7 +18,6 @@ local ensure_packer = function()
 end
 
 local packer_bootstrap = ensure_packer()
-
 local packer = require('packer')
 
 packer.init {
@@ -29,7 +28,7 @@ return packer.startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- Theme
+  -- Themes
   use {
     'olivercederborg/poimandres.nvim',
     config = function()
@@ -39,9 +38,7 @@ return packer.startup(function(use)
     end
   }
 
-  use { "ellisonleao/gruvbox.nvim" }
-  use { "jacoborus/tender.vim" }
-  use { "catppuccin/nvim", as = "catppuccin" }
+  use { 'catppuccin/nvim', as = 'catppuccin' }
 
 
   -- Treesitter
@@ -63,18 +60,15 @@ return packer.startup(function(use)
 
   -- File Tree
   use {
-  "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v2.x',
     requires = { 
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+      'MunifTanjim/nui.nvim',
     }
   }
 
-  use {
-    "neovim/nvim-lspconfig",
-  }
 
   -- Status line
   use {
@@ -85,28 +79,28 @@ return packer.startup(function(use)
 
   -- Smooth tmux / vim navigation
   use({
-    "aserowy/tmux.nvim",
-    config = function() require("tmux").setup() end
+    'aserowy/tmux.nvim',
+    config = function() require('tmux').setup() end
   })
 
 
   -- Git signs in the statusline
   use {
-    "lewis6991/gitsigns.nvim",
-    config = function() require("gitsigns").setup() end
+    'lewis6991/gitsigns.nvim',
+    config = function() require('gitsigns').setup() end
   }
 
   -- Autopair
   use {
-	  "windwp/nvim-autopairs",
-    config = function() require("nvim-autopairs").setup() end
+	  'windwp/nvim-autopairs',
+    config = function() require('nvim-autopairs').setup() end
   }
 
   -- surround helper
   use({
-    "kylechui/nvim-surround",
+    'kylechui/nvim-surround',
     config = function()
-      require("nvim-surround").setup({
+      require('nvim-surround').setup({
         -- Configuration here, or leave empty to use defaults
       })
     end
@@ -122,13 +116,13 @@ return packer.startup(function(use)
 
   -- LuaSnip
   use({
-    "L3MON4D3/LuaSnip",
+    'L3MON4D3/LuaSnip',
     run = "make install_jsregexp"
   })
 
   -- vim-terraform
   use({
-    "hashivim/vim-terraform",
+    'hashivim/vim-terraform',
   })
 
   -- go.nvim
@@ -141,6 +135,30 @@ return packer.startup(function(use)
 
   use 'ray-x/guihua.lua' -- required by go.nvim above
 
+  -- Which key
+  use {
+    'folke/which-key.nvim',
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+      require("which-key").setup {}
+    end
+  }
+  
+  -- LSP related
+  use { 
+    'echasnovski/mini.completion',
+    branch = 'stable',
+    config = function ()
+      require('mini.completion').setup()
+    end
+  }
+
+  use 'williamboman/mason.nvim'    
+  use 'williamboman/mason-lspconfig.nvim'
+  use {
+    'neovim/nvim-lspconfig',
+  }
 
   ----------------------------------------
   -- Autosync packer
