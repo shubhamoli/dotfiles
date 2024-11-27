@@ -6,7 +6,7 @@
 (catppuccin-reload)
 
 ;; Font
-(set-face-attribute 'default nil :font "FiraCode Nerd Font Mono-13" :weight 'Light)
+(set-face-attribute 'default nil :font "FiraCode Nerd Font Mono-14" :weight 'Light)
 
 (use-package mood-line
   :config

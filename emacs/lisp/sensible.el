@@ -8,6 +8,8 @@
 (setq frame-resize-pixelwise t)
 (setq ring-bell-function 'ignore)
 
+(add-to-list 'default-frame-alist '(undecorated . t))
+
 ;; Other useful stuff
 (setq-default word-wrap -1)
 (save-place-mode t)
