@@ -18,6 +18,8 @@
 (electric-pair-mode t)
 (show-paren-mode 1)
 (global-auto-revert-mode t)
+(setq undo-tree-auto-save-history t)
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 (setq dired-kill-when-opening-new-dired-buffer t)
 
 ;; This line must be at the end

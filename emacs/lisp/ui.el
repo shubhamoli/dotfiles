@@ -6,7 +6,7 @@
 (catppuccin-reload)
 
 ;; Font
-(set-face-attribute 'default nil :font "FiraCode Nerd Font Mono-14" :weight 'Light)
+(set-face-attribute 'default nil :font "FiraCode Nerd Font Mono-13" :weight 'Light)
 
 (use-package mood-line
   :config
@@ -16,6 +16,10 @@
 
 (use-package all-the-icons
   :if (display-graphic-p))
+
+(use-package diff-hl
+  :init
+  (global-diff-hl-mode))
 
 ;; Ends here
 (provide 'ui)
