@@ -15,6 +15,7 @@
 (add-to-list 'default-frame-alist '(undecorated . t))
 
 ;; Prevent flashing of unstyled modeline at startup
+;; We're gonna use mood-line package.
 (setq-default mode-line-format nil)
 
 ;; Setup user information
@@ -39,10 +40,12 @@
 (require 'ui)
 (require 'completion)
 (require 'tree-sitter)
-;;(require 'treemacs)
+(require 'languages)
+(require 'treemacs)
+
 
 ;; Always start emacs in server mode (only if it has not already been started)
-(require 'server)
+(load "server")
 (unless (server-running-p) (server-start))
 
 ;; Move customize blocks to a separate file
@@ -51,8 +54,3 @@
  
 ;; Set backup files location to /tmp/emacsbackup
 (setq backup-directory-alist  '((".*" . "/tmp/emacsbackup")))
-
-(use-package markdown-mode
-  :ensure t
-  :mode ("*\\.md\\'" . gfm-mode)
-  :init (setq markdown-command "multimarkdown"))
