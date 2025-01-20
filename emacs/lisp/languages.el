@@ -11,5 +11,8 @@
   :mode ("*\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown"))
 
+(use-package nix-mode
+  :mode "\\.nix\\'")
+
 ;; Ends here
 (provide 'languages)

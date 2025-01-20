@@ -29,5 +29,16 @@
   (setq evil-collection-mode-list '(dired ibuffer))
   (evil-collection-init))
 
+;;(use-package perspective
+;;  :bind
+;;  ("C-x C-b" . persp-list-buffers)         ; or use a nicer switcher, see below
+;;  :custom
+;;  (persp-mode-prefix-key (kbd "C-c M-p"))  ; pick your own prefix key here
+;;  :init
+;;  (persp-mode))
+;;(add-hook 'kill-emacs-hook #'persp-state-save)
+;;
+
+
 ;; Ends here
 (provide 'editor)

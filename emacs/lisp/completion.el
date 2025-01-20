@@ -8,9 +8,9 @@
 
 (use-package orderless
   :init
-  (setq completion-styles '(orderless basic flex)
+  (setq completion-styles '(flex orderless basic)
         completion-category-defaults nil
-        completion-category-overrides '((file (styles partial-completion)))))
+        completion-category-overrides nil))
 
 (use-package consult
   :hook (completion-list-mode . consult-preview-at-point-mode)) 

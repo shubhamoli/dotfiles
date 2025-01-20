@@ -32,17 +32,54 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
+(use-package emacs
+  :init
+    (global-display-line-numbers-mode 1)
+    (setq display-line-numbers-type 'relative)
+    (global-hl-line-mode 1)
+    (scroll-bar-mode -1)
+    (tool-bar-mode -1)
+    (setq window-resize-pixelwise t)
+    (setq frame-resize-pixelwise t)
+    (setq ring-bell-function 'ignore)
+
+    ;; Open every frame maximised and undecorted
+    (add-to-list 'default-frame-alist '(undecorated . t))
+
+    ;; Other useful stuff
+    (setq-default word-wrap -1)
+    (save-place-mode t)
+    (savehist-mode t)
+    (recentf-mode t)
+    (electric-pair-mode t)
+    (show-paren-mode 1)
+    (global-auto-revert-mode t)
+    (setq undo-tree-auto-save-history t)
+    (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+    (setq dired-kill-when-opening-new-dired-buffer 1)
+
+    ;; Watch for git
+    (global-auto-revert-mode 1)
+    (setq auto-revert-check-vc-info t)
+    
+    ;; Hide title bar but still able to resize using the Mouse
+    (add-to-list 'default-frame-alist '(drag-internal-border . 1))
+    (add-to-list 'default-frame-alist '(internal-border-width . 5))
+
+
+    ;; Kill the buffer and close its windows
+    (define-key global-map [remap kill-buffer] 'kill-buffer-and-window))
+
 ;; Load lisp/ directory
 (add-to-list 'load-path (concat user-emacs-directory "lisp/"))
 
-(require 'sensible)
+;;(require 'sensible)
 (require 'editor)
 (require 'ui)
 (require 'completion)
 (require 'tree-sitter)
 (require 'languages)
-(require 'treemacs)
-
+(require 'treemacs-el)
 
 ;; Always start emacs in server mode (only if it has not already been started)
 (load "server")
