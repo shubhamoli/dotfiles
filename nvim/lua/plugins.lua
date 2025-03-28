@@ -29,15 +29,6 @@ return packer.startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- Themes
-  use {
-    'olivercederborg/poimandres.nvim',
-    config = function()
-      require('poimandres').setup {
-        -- Leave this empty for now
-      }
-    end
-  }
-
   use { 'catppuccin/nvim', as = 'catppuccin' }
 
 
@@ -92,7 +83,7 @@ return packer.startup(function(use)
 
   -- Autopair
   use {
-	  'windwp/nvim-autopairs',
+    'windwp/nvim-autopairs',
     config = function() require('nvim-autopairs').setup() end
   }
 
@@ -114,12 +105,6 @@ return packer.startup(function(use)
     end
   }
 
-  -- LuaSnip
-  use({
-    'L3MON4D3/LuaSnip',
-    run = "make install_jsregexp"
-  })
-
   -- vim-terraform
   use({
     'hashivim/vim-terraform',
@@ -134,25 +119,6 @@ return packer.startup(function(use)
   }
 
   use 'ray-x/guihua.lua' -- required by go.nvim above
-
-  -- Which key
-  use {
-    'folke/which-key.nvim',
-    config = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-      require("which-key").setup {}
-    end
-  }
-  
-  -- LSP related
-  use { 
-    'echasnovski/mini.completion',
-    branch = 'stable',
-    config = function ()
-      require('mini.completion').setup()
-    end
-  }
 
   use 'williamboman/mason.nvim'    
   use 'williamboman/mason-lspconfig.nvim'
