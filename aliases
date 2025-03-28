@@ -1,5 +1,6 @@
 alias fuck='sudo $(history -p \!\!)'
 
+alias vim='nvim'
 alias dc='docker-compose'
 alias kc='kubectl'
 alias gc='gcloud'
@@ -17,8 +18,6 @@ alias sbrc='source ~/.bashrc'
 # OSX
 alias brc='vim ~/.bash_profile'
 alias sbrc='source ~/.bash_profile'
-
-alias vim='nvim'
 
 alias gst='git status'
 alias gds='git diff --staged'

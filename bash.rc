@@ -22,8 +22,6 @@ set -o noclobber
 
 ulimit -n 65535
 
-. "$HOME/.asdf/asdf.sh"
-
 # if nvim is installed, set it as MANPAGER
 if command -v nvim 1>/dev/null 2>&1; then
     export MANPAGER='nvim +Man!'
@@ -42,11 +40,6 @@ git_branch() {
 [[ -f $HOME/.aliases ]] && source $HOME/.aliases
 [[ -f $HOME/.fzf_scripts ]] && source $HOME/.fzf_scripts
 [[ -f $HOME/.work.rc ]] && source $HOME/.work.rc
-if [ -n "$RANGER_LEVEL" ]; then export PS1="[ranger]$PS1"; fi
-
-# NVM -- Node Version Manager
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 set_prompt() {
   # Custom PS1
@@ -64,7 +57,6 @@ set_prompt() {
 	local white="\e[1;37m";
 	local yellow="\e[1;33m";
 
-  #export PS1="\w ${green}\$(git_branch)${reset} \n ⬤  ${yellow}⬤  ${blue}⬤ ${reset} "
   export PS1="\w \e[0;32m\$(git_branch)\e[0m \n ⬤  "
 }
 
@@ -80,15 +72,6 @@ if command -v direnv 1>/dev/null 2>&1; then
     eval "$(direnv hook bash)"
 fi
 
-# enable bash completion
-if [ "$(uname)" == "Darwin" ]; then
-    export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
-    [[ -r "/usr/local/etc/profile.d/bash_completion.sh"  ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
-else
-    [[ -f /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
-fi
-
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/oli/google-cloud-sdk/path.bash.inc' ]; then . '/Users/oli/google-cloud-sdk/path.bash.inc'; fi
 
@@ -100,4 +83,4 @@ export PATH="/opt/homebrew/bin:$PATH"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Rust toolings
-. "$HOME/.cargo/env"
+#. "$HOME/.cargo/env"
