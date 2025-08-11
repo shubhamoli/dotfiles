@@ -79,7 +79,16 @@
 (require 'completion)
 (require 'tree-sitter)
 (require 'languages)
-(require 'treemacs-el)
+;;(require 'treemacs)
+
+(use-package neotree
+  :init
+    (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+    (setq neo-smart-open t)
+    (setq projectile-switch-project-action 'neotree-projectile-action))
+
+(use-package nix-mode
+  :mode "\\.nix\\'")
 
 ;; Always start emacs in server mode (only if it has not already been started)
 (load "server")

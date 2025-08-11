@@ -72,15 +72,19 @@ if command -v direnv 1>/dev/null 2>&1; then
     eval "$(direnv hook bash)"
 fi
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/oli/google-cloud-sdk/path.bash.inc' ]; then . '/Users/oli/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/oli/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/oli/google-cloud-sdk/completion.bash.inc'; fi
-
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Rust toolings
-#. "$HOME/.cargo/env"
+. "$HOME/.cargo/env"
+
+export GOPATH=$(go env GOPATH)
+export PATH=$PATH:$(go env GOPATH)/bin
+
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/oli/Oli/google-cloud-sdk/path.bash.inc' ]; then . '/Users/oli/Oli/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/oli/Oli/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/oli/Oli/google-cloud-sdk/completion.bash.inc'; fi
