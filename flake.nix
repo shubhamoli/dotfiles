@@ -2,12 +2,12 @@
   description = "Oli's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
-    nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
+    nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -27,10 +27,23 @@
           pkgs.gnupg
           pkgs.tmux
           pkgs.neovim
+          pkgs.go
+          pkgs.kustomize
+          pkgs.alacritty
         ];
 
-      # Necessary for using flakes on this system.
-      nix.settings.experimental-features = "nix-command flakes";
+      # Post migration changes
+      # from v24.11 -> v25.11
+      system.primaryUser = "shubham";
+
+      # Auto upgrade nix package and the daemon service.
+      nix = {
+        enable = true; 
+        # Necessary for using flakes on this system.
+        settings = {
+          experimental-features = "nix-command flakes";
+        };
+      };
 
       # Enable alternative shell support in nix-darwin.
       programs.bash.enable = true;
@@ -45,8 +58,6 @@
       # Set Git commit hash for darwin-version.
       system.configurationRevision = self.rev or self.dirtyRev or null;
 
-      # Auto upgrade nix package and the daemon service.
-      services.nix-daemon.enable = true; 
 
       # Used for backwards compatibility, please read the changelog before changing.
       # $ darwin-rebuild changelog
@@ -56,7 +67,7 @@
       nixpkgs.hostPlatform = "aarch64-darwin";
 
       # Enable touch id for sudo
-      security.pam.enableSudoTouchIdAuth = true;
+      security.pam.services.sudo_local.touchIdAuth = true;
 
       # System defaults
       system = {
@@ -72,7 +83,7 @@
 
       fonts.packages = with pkgs; [
         recursive
-	        (nerdfonts.override { fonts = [ "FiraCode" ]; })
+	      nerd-fonts.fira-code
       ];
       
       # Enable Homebrew
@@ -81,22 +92,38 @@
 
         taps = [
           "hashicorp/tap"
+          "confluentinc/tap"
+          "cue-lang/tap"
         ];
         brews = [
           "bash"
           "curl"
           "fzf"
+          "watch"
           "go@1.23"
           "jq"
           "kubectl"
-          "node@23"
+          "node@22"
           "ripgrep"
+          "hashicorp/tap/packer"
           "terraform"
+          "terraform-docs"
           "terragrunt"
           "tpm"
           "wget"
+          "confluentinc/tap/cli"
+          "libpq"
+          "yq"
+          "helm"
+          "podman"
+          "ipcalc"
+          "cue"
+          "telnet"
+          "tree"
+          "jj"
         ];
         casks = [
+          "1password-cli"
           "google-cloud-sdk"
         ];
       };
@@ -111,6 +138,7 @@
        home-manager.darwinModules.home-manager {
          home-manager.useGlobalPkgs = true;
          home-manager.useUserPackages = true;
+         home-manager.backupFileExtension = "backup-nix";
          home-manager.users.shubham = import ./home.nix;
        }
      ];

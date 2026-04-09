@@ -26,6 +26,8 @@
     ".bash_profile".source = /Users/shubham/oli/dotfiles/bash.rc;
     ".aliases".source = /Users/shubham/oli/dotfiles/aliases;
 
+    ".config/alacritty.toml".source = /Users/shubham/oli/dotfiles/alacritty.toml;
+
     # There was some permissions issue with nix
     # and for now I've solved this by running
     #

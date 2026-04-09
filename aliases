@@ -28,6 +28,7 @@ alias grec='git for-each-ref --sort=-committerdate refs/heads/ | head -n 5'
 alias fbr='git short-recent | fzf --print0 | xargs -0 -t git checkout'
 
 alias copyrsa='cat ~/.ssh/id_rsa.pub | pbcopy'
-
+alias rebuild='darwin-rebuild switch --flake flake.nix --impure'
 alias ctags='/usr/local/bin/ctags'
 
+alias rebuild="darwin-rebuild switch --flake . --impure"

@@ -44,7 +44,7 @@ return packer.startup(function(use)
 
   -- Telescope
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    'nvim-telescope/telescope.nvim', tag = '0.2.1',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
@@ -52,7 +52,7 @@ return packer.startup(function(use)
   -- File Tree
   use {
     'nvim-neo-tree/neo-tree.nvim',
-    branch = 'v2.x',
+    branch = 'v3.x',
     requires = { 
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
