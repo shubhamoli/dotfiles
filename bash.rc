@@ -77,7 +77,7 @@ export PATH="/opt/homebrew/bin:$PATH"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Rust toolings
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 export GOPATH=$(go env GOPATH)
 export PATH=$PATH:$(go env GOPATH)/bin
@@ -88,3 +88,18 @@ if [ -f '/Users/oli/Oli/google-cloud-sdk/path.bash.inc' ]; then . '/Users/oli/Ol
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/oli/Oli/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/oli/Oli/google-cloud-sdk/completion.bash.inc'; fi
+
+tfsc() {
+  terraform plan -out=plan && \
+  terraform show -no-color -json plan | jq -r '.resource_changes[] | select(.change.actions[0]=="create") | .address'
+}
+
+tfsu() {
+  terraform plan -out=plan && \
+  terraform show -no-color -json plan | jq -r '.resource_changes[] | select(.change.actions[0]=="update") | .address'
+}
+
+tfsd() {
+  terraform plan -out=plan && \
+  terraform show -no-color -json plan | jq -r '.resource_changes[] | select(.change.actions[0]=="delete") | .address'
+}
